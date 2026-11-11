@@ -1,0 +1,390 @@
+/* ==========================================================================
+   Tá Chegando — componentes (carregado depois de styles.css)
+   Regra única: tudo que fica SOBRE FOTO usa vidro (glassmorphism).
+   Duas variações: vidro claro (padrão) e vidro escuro (.foto-clara, menu).
+   ========================================================================== */
+:root{
+  --vidro-bg:rgba(255,255,255,.14);
+  --vidro-borda:rgba(255,255,255,.38);
+  --vidro-blur:14px;
+  --vidro-sombra:0 8px 32px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.25);
+  --vidro-esc-bg:rgba(23,63,60,.46);
+  --vidro-esc-borda:rgba(255,255,255,.22);
+  --vidro-esc-blur:22px;
+  --h-botao:48px;--h-botao-sm:44px;--h-selo:40px;
+  --r-pilula:99px;--r-botao:14px;--r-cartao:20px;--r-painel:24px;
+}
+/* ---- vidro: classes utilitárias ---- */
+.vidro{background:var(--vidro-bg);border:1.5px solid var(--vidro-borda);-webkit-backdrop-filter:blur(var(--vidro-blur));backdrop-filter:blur(var(--vidro-blur));box-shadow:var(--vidro-sombra);color:#fff}
+.vidro-escuro{background:var(--vidro-esc-bg);border:1.5px solid var(--vidro-esc-borda);-webkit-backdrop-filter:blur(var(--vidro-esc-blur));backdrop-filter:blur(var(--vidro-esc-blur));box-shadow:var(--vidro-sombra);color:#fff}
+
+/* ---- aplicado a tudo que fica sobre foto ---- */
+.hero .selo,
+.hero .menu-btn,
+.hero header.top nav .btn.ln,
+.hero .acoes .btn.ln,
+.hero .caminho:not(.v),
+.hero .passos-h div{
+  background:var(--vidro-bg);border:1.5px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--vidro-blur));backdrop-filter:blur(var(--vidro-blur));
+  box-shadow:var(--vidro-sombra);color:#fff;
+}
+.hero.foto-clara .selo,
+.hero.foto-clara .menu-btn,
+.hero.foto-clara header.top nav .btn.ln,
+.hero.foto-clara .acoes .btn.ln,
+.hero.foto-clara .caminho:not(.v),
+.hero.foto-clara .passos-h div,
+.mosaico figcaption{
+  background:var(--vidro-esc-bg);border:1.5px solid var(--vidro-esc-borda);
+  -webkit-backdrop-filter:blur(var(--vidro-esc-blur));backdrop-filter:blur(var(--vidro-esc-blur));
+  box-shadow:var(--vidro-sombra);color:#fff;
+}
+.hero .btn.ln:hover,.hero .caminho:not(.v):hover{background:rgba(255,255,255,.24)}
+.hero.foto-clara .btn.ln:hover{background:rgba(23,63,60,.62)}
+
+/* ---- medidas padronizadas ---- */
+.btn{min-height:var(--h-botao);border-radius:var(--r-botao);padding-top:0;padding-bottom:0}
+.btn.sm{min-height:var(--h-botao-sm);border-radius:var(--r-botao)}
+.hero .selo{display:inline-flex;align-items:center;min-height:var(--h-selo);padding:0 16px;border-radius:var(--r-pilula);margin-bottom:22px}
+.hero .menu-btn{width:var(--h-botao);height:var(--h-botao);border-radius:var(--r-botao)}
+.hero .caminho,.hero .passos-h div{border-radius:var(--r-cartao)}
+.mosaico figcaption{border-radius:var(--r-pilula);padding:5px 14px;font-weight:800}
+
+/* ---- menu do celular: tela cheia com vidro (opção A) ---- */
+@media(max-width:1000px){
+  header.top .logo,header.top .menu-btn{position:relative;z-index:62}
+  header.top .menu-btn{display:flex;background:var(--vidro-bg);border:1.5px solid var(--vidro-borda);box-shadow:var(--vidro-sombra);-webkit-backdrop-filter:blur(var(--vidro-blur));backdrop-filter:blur(var(--vidro-blur))}
+  header.top nav{
+    display:none;position:fixed;inset:0;z-index:60;
+    flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;
+    padding:96px 22px max(22px,env(safe-area-inset-bottom));
+    background:rgba(23,63,60,.58);
+    -webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2);
+    border:0;border-radius:0;box-shadow:none;overflow-y:auto;
+  }
+  header.top nav.aberto{display:flex}
+  header.top nav a:not(.btn){
+    display:flex!important;flex-direction:column;align-items:flex-start;gap:2px;
+    padding:16px 0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.2);
+    font-family:var(--fh);font-weight:700;font-size:1.75rem;color:#fff;letter-spacing:-.01em;
+  }
+  header.top nav a:not(.btn) small{display:block;font-family:var(--f);font-weight:700;font-size:.85rem;color:#F0B34F;letter-spacing:0}
+  header.top nav a:not(.btn):hover,header.top nav a[aria-current]{background:transparent;color:#F0B34F}
+  header.top nav .btn{width:100%;margin-top:0}
+  header.top nav .btn.ln{margin-top:auto;background:var(--vidro-bg);border:1.5px solid var(--vidro-borda);color:#fff;box-shadow:var(--vidro-sombra)}
+  header.top nav .btn.ln + .btn{margin-top:10px}
+  html.menu-aberto,html.menu-aberto body{overflow:hidden}
+}
+@media(min-width:1001px){header.top nav a small{display:none}}
+@media(prefers-reduced-transparency:reduce){
+  .hero .selo,.hero .menu-btn,.hero .caminho:not(.v),.hero .passos-h div,.vidro,.vidro-escuro,.mosaico figcaption{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(23,63,60,.82)}
+}
+@media(prefers-reduced-transparency:reduce) and (max-width:1000px){
+  header.top nav{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(23,63,60,.97)}
+}
+
+/* ===== revisão mobile: abertura em faixa de foto + cartões em carrossel ===== */
+@media(max-width:900px){
+  .hero{min-height:100svh;background-size:auto 58svh;background-position:var(--pos-m,68%) 0;background-repeat:no-repeat}
+  .hero::before{background:linear-gradient(180deg,rgba(23,63,60,.35) 0,rgba(23,63,60,0) 16svh,rgba(23,63,60,.55) 40svh,#173F3C 58svh)}
+  .hero .conteudo{justify-content:flex-end;padding:calc(30svh) 20px 28px;max-width:none}
+  .hero .selo{max-width:100%;white-space:nowrap;font-size:.82rem;min-height:36px;padding:0 14px;margin-bottom:16px}
+  .hero h1,.hero.v-hero h1{font-size:clamp(2rem,9.2vw,2.6rem);line-height:1.06;margin-bottom:14px;max-width:none}
+  .hero .sub{font-size:1.02rem;line-height:1.5}
+  .hero .acoes{gap:10px;margin-top:20px}
+  .hero .acoes .btn{flex:1 1 100%}
+  .hero .caminhos,.hero .passos-h{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;margin:22px -20px 0;padding:2px 20px 10px;max-width:none;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .hero .caminhos::-webkit-scrollbar,.hero .passos-h::-webkit-scrollbar{display:none}
+  .hero .caminho{flex:0 0 78%;scroll-snap-align:start;padding:16px}
+  .hero .passos-h div{flex:0 0 64%;scroll-snap-align:start}
+}
+@media(max-width:900px){
+  .hero.v-hero .passos-h{display:flex;grid-template-columns:none;max-width:none}
+  .hero.v-hero .passos-h div{flex:0 0 64%;display:flex;align-items:center;gap:12px}
+}
+
+@media(max-width:820px){
+  .bento{gap:12px}
+  .bento article{min-height:0;padding:22px;gap:8px}
+  .bento .ic{margin-bottom:10px}
+  .manifesto{padding-bottom:56px}
+}
+
+/* ===== grafismos da identidade: padrões, ícones, divisor de rota ===== */
+/* ícones dos cartões */
+.bento .ic,.areas .ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center}
+.bento .ic svg,.areas .ic svg{stroke:currentColor;fill:none}
+.bento .b1 .ic{background:var(--laranja);color:#FFF7EF}
+.bento .b2 .ic{background:var(--azul-esc);color:#fff}
+.bento .b3 .ic{background:var(--laranja);color:#FFF7EF}
+.bento .b4 .ic{background:var(--azul-cl);color:var(--azul-esc)}
+.areas .ic{margin-bottom:6px}
+.areas article:nth-child(3n+1) .ic{background:var(--laranja);color:#FFF7EF}
+.areas article:nth-child(3n+2) .ic{background:var(--azul-esc);color:#fff}
+.areas article:nth-child(3n) .ic{background:var(--azul-cl);color:var(--azul-esc)}
+/* faixas em movimento: pin no lugar do ponto */
+.faixa .trilho span::after{content:"";display:inline-block;width:16px;height:22px;margin-left:44px;vertical-align:-3px;color:inherit;
+  background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-22 -24 44 56'%3E%3Cpath d='M0 -22C-13 -22 -22 -13 -22 -2C-22 12 0 30 0 30C0 30 22 12 22 -2C22 -13 13 -22 0 -22ZM0 -9a7 7 0 110 14 7 7 0 010-14Z' fill-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-22 -24 44 56'%3E%3Cpath d='M0 -22C-13 -22 -22 -13 -22 -2C-22 12 0 30 0 30C0 30 22 12 22 -2C22 -13 13 -22 0 -22ZM0 -9a7 7 0 110 14 7 7 0 010-14Z' fill-rule='evenodd'/%3E%3C/svg%3E") center/contain no-repeat;opacity:.9}
+.faixa:not(.az) .trilho span::after{color:var(--azul-esc)}
+.faixa.az .trilho span::after{color:var(--laranja)}
+/* divisor de rota */
+.rota-div{position:relative;height:90px;margin:0;overflow:hidden;background:#fff}
+.rota-div svg{position:absolute;inset:0;width:100%;height:100%}
+.rota-div .p{position:absolute;width:26px;height:26px;border-radius:50%;background:var(--laranja);border:5px solid #fff;box-shadow:0 0 0 3px var(--laranja);transform:translate(-50%,-50%)}
+.rota-div .p1{left:25%;top:34%}.rota-div .p2{left:50%;top:55%}.rota-div .p3{left:80%;top:38%}
+@media(max-width:700px){.rota-div{height:60px}.rota-div .p{width:20px;height:20px;border-width:4px}}
+.bento .ic svg,.areas .ic svg{width:30px;height:30px}
+
+@media(max-width:900px){.hero{background-image:var(--bgm,url(/img/hero-v2-moto-s-m.webp))}}
+
+/* alvos de toque mínimos (44 px) */
+.faq summary{min-height:44px;align-items:center}
+.volta{display:inline-flex;align-items:center;min-height:44px}
+.aviso-form .chk{min-height:44px;align-items:center}
+.aviso-form .chk input{width:24px;height:24px}
+.legal a,.aviso-form .chk a{padding:10px 0;display:inline-block}
+
+/* celular ilustrado: rótulos do app real */
+.fone .seg{display:flex;gap:6px;margin-top:8px}
+.fone .seg i{flex:1;text-align:center;font-style:normal;font-weight:800;font-size:.72rem;padding:6px 4px;border-radius:99px;background:#F6EBDD;color:var(--azul-esc)}
+.fone .seg i.on{background:var(--azul-esc);color:#fff}
+.fone .busca{position:absolute;top:42px;left:12px;right:12px;background:#fff;border-radius:14px;padding:10px 12px;font-size:.78rem;color:var(--suave);font-weight:600;box-shadow:0 4px 14px rgba(23,63,60,.18)}
+.fone .cats{position:absolute;top:92px;left:12px;right:12px;display:flex;gap:6px;flex-wrap:wrap}
+.fone .cats i{font-style:normal;font-weight:800;font-size:.68rem;padding:5px 10px;border-radius:99px;background:#fff;color:var(--azul-esc);box-shadow:0 2px 8px rgba(23,63,60,.14)}
+.fone .cats i.on{background:var(--laranja);color:#FFF7EF}
+.fone .card span{display:inline-block}
+
+.hero.curto{min-height:0}
+.hero.curto .conteudo{justify-content:flex-start;padding-top:48px;padding-bottom:56px}
+@media(max-width:900px){.hero.curto .conteudo{padding-top:calc(24svh);padding-bottom:28px}.hero.curto{background-size:auto 46svh}}
+.lista-clara li{background:#fff;border:1.5px solid #EADFD2;color:var(--azul-esc);-webkit-backdrop-filter:none;backdrop-filter:none}
+.aviso-form select{width:100%;font:inherit;padding:14px;border:2px solid var(--azul-esc);border-radius:12px;background:#fff;color:var(--texto);min-height:48px}
+.rod-links a{padding:13px 4px}
+
+.hero.curto::before{background:linear-gradient(90deg,rgba(23,63,60,.94) 0%,rgba(23,63,60,.72) 55%,rgba(23,63,60,.55) 100%)}
+@media(max-width:900px){.hero.curto::before{background:linear-gradient(180deg,rgba(23,63,60,.55) 0,rgba(23,63,60,.2) 14svh,rgba(23,63,60,.9) 40svh,#173F3C 56svh)}}
+.chk + .erro-campo{margin:6px 0 0}
+
+/* selo discreto de protótipo (entrar e painel) */
+.proto-tag{position:fixed;right:12px;bottom:12px;z-index:45;background:rgba(23,63,60,.82);color:#fff;font:800 .72rem/1 var(--fh);letter-spacing:.04em;padding:7px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.25);pointer-events:none}
+@media(max-width:860px){body.painel .proto-tag{bottom:92px;right:10px}}
+
+/* ---- barra fixa: transparente no topo, vidro compacto ao rolar ---- */
+:root{--hdr:66px}
+
+header.top{position:fixed;top:0;left:0;right:0;z-index:50;transition:padding .25s ease}
+header.top::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .25s ease;
+  background:rgba(23,63,60,.72);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);
+  border-bottom:1px solid rgba(255,255,255,.12);box-shadow:0 10px 30px -18px rgba(23,63,60,.7)}
+header.top.rolou{padding-top:10px;padding-bottom:10px}
+header.top.rolou::before,header.top.solido::before{opacity:1}
+header.top.solido::before{background:var(--azul-esc);-webkit-backdrop-filter:none;backdrop-filter:none}
+header.top .logo img{transition:height .25s ease}
+header.top.rolou .logo img{height:34px}
+.hero{padding-top:var(--hdr)}
+body.legal header.top,body.pg header.top{position:fixed;background:transparent}
+@media(max-width:1000px){header.top{position:fixed}}
+@media(prefers-reduced-motion:reduce){header.top,header.top::before,header.top .logo img{transition:none}}
+@media(prefers-reduced-transparency:reduce){header.top::before{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--azul-esc)}}
+body.legal{margin-top:0;font-size:18px;color:var(--texto)}
+header.top .logo{display:flex;align-items:center;line-height:0;padding:0}
+nav.doc-ind{top:88px}
+nav.doc-ind a{display:flex;align-items:center;min-height:44px}
+@media(max-width:860px){nav.doc-ind{top:auto}}
+
+/* =====================================================================
+   Identidade nova (tomate, petróleo, creme, amarelo; Baloo 2 + Nunito Sans)
+   Mesmo desenho da Home: barra em pílula, aberturas em cor sólida com foto
+   recortada em barra de toldo, botões arredondados.
+   ===================================================================== */
+:root{--r-botao:99px;--gut:clamp(20px,5vw,56px)}
+.btn.az{background:var(--petroleo)}.btn.az:hover{background:#0F2D2B}
+
+/* barra em pílula */
+header.top{top:12px;left:max(16px,calc((100vw - 1180px)/2 + 0px));right:max(16px,calc((100vw - 1180px)/2 + 0px));padding:8px 10px 8px 22px;border-radius:99px;
+  background:rgba(255,247,239,.96);border:1px solid rgba(41,37,45,.08);box-shadow:0 14px 34px -22px rgba(41,37,45,.6);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);transition:padding .25s,box-shadow .25s}
+header.top::before{display:none}
+header.top.rolou{padding-top:5px;padding-bottom:5px;box-shadow:0 14px 40px -16px rgba(41,37,45,.7)}
+body.legal header.top,body.pg header.top{padding-inline:22px 10px}
+header.top .logo img{height:36px;width:auto}
+header.top.rolou .logo img{height:32px}
+header.top .logo .s-cr{display:none}
+header.top nav{gap:4px}
+header.top nav a:not(.btn){display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:99px;color:var(--petroleo);font-weight:700}
+header.top nav a:not(.btn):hover{background:rgba(23,63,60,.08)}
+header.top nav a[aria-current]:not(.btn){color:var(--tomate-esc,#A33D2E)}
+header.top nav .btn,.hero header.top nav .btn{margin-left:6px}
+header.top nav .btn.ln,.hero header.top nav .btn.ln,.hero.foto-clara header.top nav .btn.ln{background:transparent;border:2px solid var(--petroleo);color:var(--petroleo);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+header.top nav .btn.ln:hover{background:rgba(23,63,60,.08)}
+header.top nav .btn.or{background:var(--tomate);color:#FFF7EF}
+header.top .menu-btn,.hero header.top .menu-btn,.hero.foto-clara header.top .menu-btn,.hero .menu-btn{width:48px;height:48px;border-radius:50%;background:var(--petroleo);border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+header.top .menu-btn span{background:#FFF7EF}
+@media(max-width:1000px){
+  header.top{left:16px;right:16px;padding:8px 8px 8px 18px}
+  header.top nav{background:var(--petroleo);-webkit-backdrop-filter:none;backdrop-filter:none;padding-top:104px}
+  header.top nav a:not(.btn){color:#FFF7EF;min-height:0;padding:16px 0;border-radius:0;display:flex!important}
+  header.top nav a:not(.btn):hover,header.top nav a[aria-current]:not(.btn){background:transparent;color:var(--amarelo)}
+  header.top nav .btn{margin-left:0}
+  header.top nav .btn.ln,.hero header.top nav .btn.ln{margin-top:auto;border-color:rgba(255,247,239,.6);color:#FFF7EF}
+  html.menu-aberto header.top{background:transparent;border-color:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+  html.menu-aberto header.top .logo .s-to{display:none}
+  html.menu-aberto header.top .logo .s-cr{display:block}
+  html.menu-aberto header.top .menu-btn{background:#FFF7EF}
+  html.menu-aberto header.top .menu-btn span{background:var(--petroleo)}
+}
+
+/* aberturas: cor sólida + foto recortada com barra de toldo (sem foto de fundo) */
+.hero{background:var(--cor,var(--tomate))!important;color:#FFF7EF}
+.hero::before{display:none}
+.hero h1 em{color:inherit;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9 C 20 3, 34 3, 50 8 S 82 13, 98 7 S 112 4, 117 6' fill='none' stroke='%23F0B34F' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") 0 84%/100% .2em no-repeat;padding-bottom:.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero .sub{color:#FFF7EF;opacity:.95}
+.hero .selo{display:none}
+.hero .acoes .btn.or{background:var(--amarelo);color:var(--grafite)}
+.hero .acoes .btn.or:hover{background:#F5C06A}
+.hero .acoes .btn.ln,.hero.foto-clara .acoes .btn.ln{background:transparent;border:2px solid rgba(255,247,239,.75);color:#FFF7EF;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.hero .acoes .btn.ln:hover{background:rgba(255,247,239,.14)}
+.hero .passos-h div,.hero.foto-clara .passos-h div,.hero .caminho:not(.v),.hero.foto-clara .caminho:not(.v){background:rgba(255,247,239,.12);border:1.5px solid rgba(255,247,239,.35);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:#FFF7EF}
+.hero.v-hero .passos-h b{background:var(--amarelo);color:var(--grafite)}
+.hero::after{content:"";position:absolute;z-index:0;right:max(28px,calc((100vw - 1180px)/2 + 20px));top:calc(50% + var(--hdr)/2);width:min(30vw,380px);aspect-ratio:4/5;
+  background:var(--bg) var(--pos-foto,center)/cover no-repeat;border-radius:28px 28px 0 0;transform:translateY(-50%) rotate(-4deg);
+  -webkit-mask:radial-gradient(circle at 50% 0,#000 0 16px,transparent 16.5px) 0 100%/32px 16px repeat-x,linear-gradient(#000,#000) 0 0/100% calc(100% - 15px) no-repeat;
+  mask:radial-gradient(circle at 50% 0,#000 0 16px,transparent 16.5px) 0 100%/32px 16px repeat-x,linear-gradient(#000,#000) 0 0/100% calc(100% - 15px) no-repeat}
+.hero .conteudo{position:relative;z-index:1}
+@media(min-width:901px){.hero .conteudo{box-sizing:border-box;width:100%;max-width:1180px;margin-inline:auto;padding-left:clamp(20px,5vw,56px);padding-right:calc(min(30vw,380px) + 72px)}.hero.curto .conteudo{padding-right:calc(min(16vw,200px) + 72px)}}
+.hero.curto::after{width:min(16vw,200px);aspect-ratio:1/1;top:auto;bottom:26px;transform:rotate(-4deg)}
+@media(max-width:900px){
+  .hero::after{background-image:var(--bgm,var(--bg))}
+  .hero,.hero.curto{min-height:0;background-image:none!important}
+  .hero::after,.hero.curto::after{position:relative;right:auto;top:auto;order:-1;align-self:center;width:min(64vw,260px);margin:calc(var(--hdr) + 22px) auto 0;transform:rotate(-3deg)}
+  .hero .conteudo,.hero.curto .conteudo{padding:26px 20px 34px}
+  .hero{padding-top:0}
+}
+@media(prefers-reduced-transparency:reduce){header.top{-webkit-backdrop-filter:none;backdrop-filter:none;background:#FFF7EF}}
+/* Entrar: lado da marca em tomate, sem foto de fundo */
+.auth .lado-a{background:var(--tomate)!important}
+.auth .lado-a::before{display:none}
+.auth .lado-a h2 em{color:inherit;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9 C 20 3, 34 3, 50 8 S 82 13, 98 7 S 112 4, 117 6' fill='none' stroke='%23F0B34F' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") 0 84%/100% .2em no-repeat;padding-bottom:.08em}
+.auth .lado-a p{color:#FFF7EF}
+.hero .sub{opacity:1}
+.hero .passos-h div,.hero.foto-clara .passos-h div,.hero .caminho:not(.v),.hero.foto-clara .caminho:not(.v){background:rgba(15,45,43,.22);border-color:rgba(255,247,239,.4)}
+.auth .lado-lista li{background:rgba(15,45,43,.22)!important;border-color:rgba(255,247,239,.4)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;color:#FFF7EF}
+/* faixa que corre: amarela, como na Home */
+.faixa:not(.az){background:var(--amarelo);color:var(--grafite)}
+.faixa:not(.az) .trilho span::after{color:var(--tomate)}
+.faixa.az{background:var(--petroleo);color:#FFF7EF}
+.faixa.az .trilho span::after{color:var(--amarelo)}
+.hero.v-hero .passos-h div{background:rgba(15,45,43,.22);border-color:rgba(255,247,239,.4)}
+@media(max-width:900px){.hero.curto::after{display:none}}
+/* decoração das seções: pins amarelos suaves só no computador (no celular ficavam soltos nos cantos) */
+.deco .pin{color:var(--amarelo)!important}
+.rede .deco .pin{color:var(--petroleo)!important}
+@media(max-width:700px){.deco{display:none}}
+@media(max-width:900px){.hero.curto{padding-top:calc(var(--hdr) + 14px)}}
+
+/* ===== barra padronizada: mesmas medidas da Home (header.topo) ===== */
+header.top{left:max(var(--gut),calc((100vw - 1180px)/2));right:max(var(--gut),calc((100vw - 1180px)/2));padding:10px 12px 10px 22px}
+header.top.rolou{padding-top:6px;padding-bottom:6px}
+header.top .logo img,header.top.rolou .logo img{height:38px;width:auto}
+header.top nav .btn.sm,header.top nav .btn{min-height:44px;padding:0 20px;font-weight:700;font-size:.95rem}
+@media(max-width:1000px){
+  header.top{left:var(--gut);right:var(--gut);padding:8px 8px 8px 18px}
+  header.top.rolou{padding-top:8px;padding-bottom:8px}
+  header.top .logo img,header.top.rolou .logo img{height:32px}
+  header.top nav a:not(.btn){font:800 2rem/1.1 var(--fh);padding:14px 0;border-bottom:1px solid rgba(255,247,239,.2);flex-direction:column;align-items:flex-start;gap:2px}
+  header.top nav a:not(.btn) small{font:700 .9rem var(--f);color:var(--amarelo)}
+  header.top nav{padding:104px calc(var(--gut) + 18px) max(26px,env(safe-area-inset-bottom))}
+}
+header.top nav{gap:6px}
+body.legal header.top,body.pg header.top{padding:10px 12px 10px 22px}
+body.legal header.top.rolou,body.pg header.top.rolou{padding-top:6px;padding-bottom:6px}
+@media(max-width:1000px){body.legal header.top,body.pg header.top{padding:8px 8px 8px 18px}body.legal header.top.rolou,body.pg header.top.rolou{padding-top:8px;padding-bottom:8px}}
+header.top nav .btn{display:inline-flex;align-items:center;justify-content:center;line-height:1.2}
+@media(max-width:1000px){header.top nav{gap:0}}
+@media(max-width:1000px){header.top.rolou,body.legal header.top.rolou,body.pg header.top.rolou{padding-top:6px;padding-bottom:6px}}
+/* Privacidade e Termos: a faixa de título começa no topo, por trás da barra */
+body.legal .doc-topo{padding-top:calc(var(--hdr,92px) + 12px + clamp(28px,4vw,56px))}
+body.legal header.top,body.pg header.top{background:rgba(255,247,239,.96)}
+/* Parceria no rodapé */
+footer.rod .rod-par{display:flex;flex-direction:row;gap:14px;align-items:center;flex-basis:100%;padding-top:20px;border-top:1px solid rgba(255,247,239,.16)}
+footer.rod .rod-par span{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#B9C7C2}
+footer.rod .rod-par a{padding:0;display:block}
+footer.rod .rod-par img{height:24px;width:auto;opacity:.85}
+@media(min-width:901px){.areas article:nth-child(7):last-child{grid-column:span 3}}
+/* AVAASP */
+.card-av{background:var(--creme-2);border-radius:28px;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px}
+.card-av img{width:min(70%,320px);height:auto}
+.card-av p{font:800 1.05rem var(--fh);color:var(--petroleo)}
+.contato-av{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.contato-av li{background:#fff;border:2px solid var(--petroleo);border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.contato-av b{font:800 .85rem var(--fh);letter-spacing:.04em;text-transform:uppercase;color:var(--tomate-esc,#A33D2E)}
+.contato-av a,.contato-av span{color:var(--petroleo);font-weight:700;overflow-wrap:anywhere}
+@media(max-width:700px){.contato-av{grid-template-columns:1fr}}
+.areas-s .acoes{display:flex;flex-wrap:wrap;gap:12px}
+.contato-av+.nota-s{margin-top:18px}
+.par-v{background:var(--creme-2)}
+.par-v .card-av{background:#fff;text-decoration:none}
+/* Galerias de fotos */
+.galeria{padding:clamp(56px,7vw,96px) 0;background:var(--creme)}
+.galeria h2{color:var(--petroleo)}
+.galeria .lead{margin-top:14px;max-width:34em}
+.gal{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:16px}
+.gal figure{margin:0}
+.gal img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:22px;background:var(--creme-2)}
+.gal figcaption{margin-top:10px;font:800 1rem var(--fh);color:var(--petroleo)}
+.gal.c4{grid-template-columns:repeat(4,1fr)}
+.gal.c5{grid-template-columns:repeat(6,1fr)}
+.gal.c5 li{grid-column:span 2}
+.gal.c5 li:nth-child(n+4){grid-column:span 3}
+@media(max-width:900px){.gal.c4{grid-template-columns:repeat(2,1fr)}.gal.c5{grid-template-columns:repeat(2,1fr)}.gal.c5 li,.gal.c5 li:nth-child(n+4){grid-column:auto}.gal.c5 li:last-child{grid-column:1/-1}}
+@media(max-width:700px){.card-av{aspect-ratio:auto;padding:26px 20px;gap:12px}.card-av img{width:min(56%,190px)}.card-av p{font-size:.95rem}}
+
+/* pinos decorativos só onde sobra margem lateral: abaixo disso eles encostavam em títulos e listas */
+@media(max-width:1399px){.deco .pin{display:none}}
+
+/* celular: os três passos da abertura ficam empilhados e inteiros (antes era uma faixa rolável sem indicação, com o 3º cortado) */
+@media(max-width:700px){
+  .hero .passos-h,.hero.v-hero .passos-h{display:grid;grid-template-columns:1fr;gap:8px;overflow:visible;margin:22px 0 0;padding:0;max-width:none}
+  .hero .passos-h div,.hero.v-hero .passos-h div{flex:none;width:100%;padding:10px 14px}
+}
+
+/* cartões em tons suaves: fundo creme claro, ícone em tinta leve (antes eram blocos preto, tomate, verde e branco) */
+.bento article,.areas article,.areas article:nth-child(3n+1),.areas article:nth-child(3n+2),
+.bento .b1,.bento .b2,.bento .b3,.bento .b4{background:#FBF3E8;color:var(--grafite);border:1px solid rgba(41,37,45,.09)}
+.bento article h3,.areas article h3{color:var(--petroleo)}
+.bento article p,.areas article p,.bento .b1 p,.bento .b3 p,.areas article:nth-child(3n+1) p{color:#4A444F}
+.bento .b1 .ic,.bento .b4 .ic,.areas article:nth-child(3n+1) .ic{background:#F4DDD6;color:#A33D2E}
+.bento .b2 .ic,.areas article:nth-child(3n+2) .ic{background:#DCE7E1;color:var(--petroleo)}
+.bento .b3 .ic,.areas article:nth-child(3n+3) .ic,.areas article .ic{background:#F9E8C6;color:#7A5200}
+.areas article:nth-child(3n+1) .ic{background:#F4DDD6;color:#A33D2E}
+.areas article:nth-child(3n+2) .ic{background:#DCE7E1;color:var(--petroleo)}
+/* "o que faz / o que não faz": dois cartões claros no fundo verde, em vez de verde translúcido e tomate cheio */
+.transp2 .faz{background:#FBF3E8;color:var(--grafite);border:0}
+.transp2 .nao{background:#F4DDD6;color:var(--grafite)}
+.transp2 .col h3{color:var(--petroleo)}
+.transp2 .faz li::before{color:#2C6A55}
+.transp2 .nao li::before{color:#A33D2E}
+/* Navbar: nunca quebra linha e se compacta antes de faltar espaço */
+header.top .logo,header.top .menu-btn{flex:0 0 auto}
+header.top nav{flex:0 1 auto;min-width:0}
+header.top nav a,header.top nav .btn{white-space:nowrap}
+@media(min-width:1001px) and (max-width:1300px){
+  header.top nav{gap:0}
+  header.top nav a:not(.btn){padding:0 10px;font-size:.95rem}
+  header.top nav .btn,.hero header.top nav .btn{margin-left:4px;padding-left:14px;padding-right:14px;font-size:.9rem}
+}
+
+/* Alinhamento com a Home: etapa do produto, rótulos de seção e fundos que alternam */
+.hero .pilula{display:inline-block;align-self:flex-start;margin-bottom:18px;padding:8px 14px;border-radius:99px;background:rgba(41,37,45,.28);color:#FFF7EF;font:800 .74rem/1 var(--f);letter-spacing:.13em;text-transform:uppercase}
+.hero.foto-clara .pilula{background:rgba(255,247,239,.16)}
+.celular .eyebrow,.transp2 .eyebrow,.final .eyebrow{color:var(--amarelo)}
+.split .eyebrow,.beneficios .eyebrow,.galeria .eyebrow,.faq .eyebrow,.areas-s .eyebrow,.como-rede .eyebrow{display:block;margin-bottom:10px}
+.celular .eyebrow,.transp2 .eyebrow,.final .eyebrow{display:block;margin-bottom:10px}
+.final .eyebrow{text-align:center}
+main>section.split:not(.par-v){background:var(--creme-2)}
+main>section.galeria{background:var(--creme-2)}
+main>section.como-rede{background:var(--creme-2)}
+
+/* Desktop: o menu fica sobre a barra e nunca ganha fundo ou desfoque próprios (evita caixa escura com 'reduzir transparência') */
+@media(min-width:1001px){header.top nav{background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:none}}
