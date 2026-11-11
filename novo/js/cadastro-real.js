@@ -147,7 +147,7 @@
       if (error) throw error;
       byId('password').value='';byId('password-confirm').value='';
       view('login'); byId('login-email').value=email;
-      message('Se o endereço puder ser cadastrado, você receberá um e-mail de confirmação. Ao confirmar, o portal preparará seu negócio e produtos automaticamente. Depois é só entrar no aplicativo. Se houver algum problema, volte aqui e entre para concluir.');
+      message('Se o endereço puder ser cadastrado, você receberá um e-mail de confirmação. Depois de confirmar seu e-mail, volte a este site e entre para concluir seu perfil e salvar os produtos. A mesma conta servirá no aplicativo.');
     } catch (err) { message(err instanceof Error && !String(err.message).includes('Auth') ? err.message : readableError(err),true); }
     finally { busyToggle(false,button); }
   });
@@ -183,6 +183,6 @@
   form.querySelectorAll('input[name=role]').forEach(input=>input.addEventListener('change',updateRole));
   byId('tab-criar').addEventListener('click',()=>view('signup'));
   byId('tab-entrar').addEventListener('click',()=>view('login'));
-  addProduct();addProduct();updateRole();view(new URLSearchParams(location.search).get('modo')==='entrar'?'login':'signup');
+  addProduct();updateRole();view(new URLSearchParams(location.search).get('modo')==='entrar'?'login':'signup');
   try {client=verifyConfig()} catch(error) {message(error.message,true);byId('submit-signup').disabled=true;byId('submit-login').disabled=true;}
 })();
