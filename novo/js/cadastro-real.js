@@ -33,7 +33,7 @@
     button.setAttribute('aria-busy', String(flag));
   }
   function addProduct(value = '') {
-    if (productList.children.length >= 30) return;
+    
     const row = document.createElement('div'); row.className = 'cad-product';
     const input = document.createElement('input');
     input.type = 'text'; input.maxLength = 160; input.required = true;
@@ -54,11 +54,56 @@
     const phone = safeText(byId('phone').value);
     const products = Array.from(productList.querySelectorAll('input')).map(i => safeText(i.value));
     if (!name || name.length > 160 || !business || business.length > 160 || !categories.includes(category) ||
-        products.length < 1 || products.length > 30 || products.some(n=> !n || n.length>160) ||
+        products.length < 1 || products.some(n=> !n || n.length>160) ||
         new Set(products.map(n=>n.toLocaleLowerCase('pt-BR'))).size !== products.length || phone.length > 32) {
-      throw new Error('Revise o nome do negócio, a categoria e informe entre 1 e 30 produtos diferentes.');
+      throw new Error('Revise o nome do negócio, a categoria e informe pelo menos um produto. Não repita nomes.');
     }
     return { name, business_name: business, category, products, phone };
+  }
+  // Additional products are a resumable local draft, not authorization data.
+  // Supabase only receives a batch after the owner confirms the account and signs in.
+  function draftKey(email) { return 'tc:catalogue-pending:v1:' + safeText(email).toLowerCase(); }
+  function ensureDraftStorage(email, names) {
+    try {
+      const key = draftKey(email);
+      const value = JSON.stringify(names);
+      const previous = localStorage.getItem(key);
+      localStorage.setItem(key, value);
+      if (previous === null) localStorage.removeItem(key); else localStorage.setItem(key, previous);
+    } catch {
+      throw new Error('Não foi possível guardar seus produtos adicionais neste navegador. Tente liberar o armazenamento do site ou cadastre até 30 produtos inicialmente.');
+    }
+  }
+  function saveDraft(email, names) {
+    // Once Auth accepted the signup, never clear the only local copy.
+    localStorage.setItem(draftKey(email), JSON.stringify(names));
+  }
+  function pendingDraft(email) {
+    try {
+      const value = JSON.parse(localStorage.getItem(draftKey(email)) || '[]');
+      if (!Array.isArray(value)) throw new Error('Invalid draft');
+      return value;
+    } catch {
+      throw new Error('Não foi possível recuperar os produtos adicionais. Entre novamente no navegador utilizado para o cadastro.');
+    }
+  }
+  async function synchronizeDraft(email) {
+    if (!email) return [];
+    const items = pendingDraft(email);
+    if (!items.length) return [];
+    let saved = 0;
+    for (let i = 0; i < items.length; i += 100) {
+      const batch = items.slice(i, i + 100);
+      const {data, error} = await client.rpc('append_my_vendor_products', {p_product_names: batch});
+      if (error || !data || typeof data.product_count !== 'number') {
+        // Preserve the remainder for a later login, even if earlier batches succeeded.
+        localStorage.setItem(draftKey(email), JSON.stringify(items.slice(i)));
+        throw new Error('Seu perfil está pronto, mas alguns produtos ainda não foram salvos. Volte a entrar neste navegador para continuar o envio.');
+      }
+      saved += batch.length;
+      localStorage.setItem(draftKey(email), JSON.stringify(items.slice(i + batch.length)));
+    }
+    return items.slice(0, saved);
   }
   function verifyConfig() {
     if (!config || config.enabled !== true) throw new Error('O cadastro real está sendo preparado. Ainda não estamos recebendo inscrições por aqui.');
@@ -109,9 +154,16 @@
       });
       if (error) throw new Error('Sua conta foi confirmada, mas o catálogo não foi salvo. Tente entrar novamente.');
       if (!data?.profile?.vendor_id || !Array.isArray(data.products)) throw new Error('Cadastro não confirmado pelo servidor.');
-      done('Seu negócio está pronto!', 'Os produtos abaixo já estão vinculados à sua conta e estarão disponíveis no aplicativo.', data.products.map(p=>p.name));
+      const extra = await synchronizeDraft(user.email);
+      done('Seu negócio está pronto!', extra.length
+        ? 'Seus produtos foram salvos. Você já pode entrar no aplicativo com esta conta.'
+        : 'Os produtos abaixo já estão vinculados à sua conta e estarão disponíveis no aplicativo.',
+        data.products.map(p=>p.name).concat(extra));
     } else {
-      done('Bem-vindo de volta!', 'Seu cadastro profissional está pronto. Entre no aplicativo com esta conta.', []);
+      const extra = await synchronizeDraft(user.email);
+      done('Bem-vindo de volta!', extra.length
+        ? 'Os produtos adicionais foram salvos. Entre no aplicativo com esta conta.'
+        : 'Seu cadastro profissional está pronto. Entre no aplicativo com esta conta.', extra);
     }
   }
   function done(title, msg, products) {
@@ -142,12 +194,18 @@
       const vendor=kind==='vendor'?readVendor():null;
       busyToggle(true,button); message('Criando sua conta…');
       const data={registration_contract:'web-v1',name,full_name:name,role:kind};
-      if (vendor) Object.assign(data, { business_name:vendor.business_name, category:vendor.category, phone:vendor.phone, onboarding_products:vendor.products });
+      if (vendor) {
+        // Auth metadata is intentionally small; additional catalogue items are stored
+        // locally until this same browser signs in with a verified account.
+        if (vendor.products.length > 30) ensureDraftStorage(email, vendor.products.slice(30));
+        Object.assign(data, { business_name:vendor.business_name, category:vendor.category, phone:vendor.phone, onboarding_products:vendor.products.slice(0, 30) });
+      }
       const {error}=await client.auth.signUp({email,password,options:{emailRedirectTo:config.confirmationUrl,data}});
       if (error) throw error;
+      if (vendor && vendor.products.length > 30) saveDraft(email, vendor.products.slice(30));
       byId('password').value='';byId('password-confirm').value='';
       view('login'); byId('login-email').value=email;
-      message('Se o endereço puder ser cadastrado, você receberá um e-mail de confirmação. Depois de confirmar seu e-mail, volte a este site e entre para concluir seu perfil e salvar os produtos. A mesma conta servirá no aplicativo.');
+      message('Se o endereço puder ser cadastrado, você receberá um e-mail de confirmação. Depois de confirmar seu e-mail, volte a este site e entre para concluir seu perfil e salvar os produtos. A mesma conta servirá no aplicativo. Se você informou mais de 30 produtos, volte para entrar neste mesmo navegador para salvar os demais.');
     } catch (err) { message(err instanceof Error && !String(err.message).includes('Auth') ? err.message : readableError(err),true); }
     finally { busyToggle(false,button); }
   });
