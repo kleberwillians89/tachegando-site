@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#BB4938">
+<title>Cadastro | Tá Chegando</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preload" href="/marca/fonts/Baloo2-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/NunitoSans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/componentes.css">
+<link rel="stylesheet" href="/entrar.css">
+<link rel="stylesheet" href="/cadastro-real.css">
+</head>
+<body>
+<a class="skip" href="#principal">Pular para o conteúdo</a>
+<main class="auth" id="principal">
+  <aside class="lado-a">
+    <a class="logo" href="/"><img src="/img/logo-horizontal-escuro.svg" alt="Tá Chegando" height="44"></a>
+    <div class="lado-txt">
+      <h2>Quem vende <em>circula.</em><br>Quem procura descobre.</h2>
+      <p>Seu negócio já fica preparado para começar. Quando entrar no aplicativo, seu perfil e seus produtos estarão lá.</p>
+      <ul class="lado-lista"><li>Uma conta para o site e o aplicativo</li><li>Seus produtos já cadastrados</li><li>Você controla sua rota no aplicativo</li></ul>
+    </div><span class="lado-fim" aria-hidden="true"></span>
+  </aside>
+  <div class="form"><div class="caixa">
+    <span class="cad-eyebrow">Tá Chegando · Acesso antecipado</span>
+    <h1 id="titulo">Crie sua conta</h1>
+    <p class="apoio" id="apoio">Preencha uma vez. Seu cadastro acompanha você até o aplicativo.</p>
+    <div class="tabs2" role="tablist" aria-label="Criar conta ou entrar">
+      <button type="button" id="tab-criar" role="tab" aria-selected="true">Criar conta</button>
+      <button type="button" id="tab-entrar" role="tab" aria-selected="false">Já tenho conta</button>
+    </div>
+    <p id="status" class="cad-status" aria-live="polite" role="status" hidden></p>
+    <form id="cad-form" novalidate>
+      <div id="cad-signup">
+        <span class="rot">Você é…</span>
+        <div class="tipos" role="radiogroup" aria-label="Tipo de conta">
+          <label><input type="radio" name="role" value="vendor" checked><span>Vendedor<small>Vendo em movimento</small></span></label>
+          <label><input type="radio" name="role" value="consumer"><span>Consumidor<small>Procuro vendedores</small></span></label>
+        </div>
+        <div class="cad-fields">
+          <label for="name">Seu nome</label><input id="name" name="name" type="text" autocomplete="name" maxlength="160" required placeholder="Como podemos chamar você?">
+          <label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="voce@exemplo.com">
+          <label for="password">Crie sua senha</label><input id="password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="128" required placeholder="Pelo menos 8 caracteres">
+          <label for="password-confirm">Confirme sua senha</label><input id="password-confirm" name="password-confirm" type="password" autocomplete="new-password" required>
+        </div>
+        <fieldset id="business-fields" class="cad-section">
+          <legend>Seu negócio</legend>
+          <div class="cad-fields">
+            <label for="business">Nome comercial</label><input id="business" name="business" maxlength="160" placeholder="Ex.: Pães da Maria">
+            <label for="category">Categoria principal</label>
+            <select id="category" name="category"><option value="">Selecione</option><option>Pães</option><option>Frutas</option><option>Salgados</option><option>Doces de padaria</option><option>Lanches naturais</option><option>Sorvetes</option><option>Temperos</option><option>Produtos de limpeza prontos</option></select>
+            <label for="phone">Telefone com DDD (opcional)</label><input id="phone" name="phone" inputmode="tel" autocomplete="tel" maxlength="32" placeholder="(11) 99999-9999">
+          </div>
+          <div class="cad-products-header"><div><strong>O que você vende?</strong><p>Cadastre seus produtos. Eles aparecerão no aplicativo depois da confirmação.</p></div></div>
+          <div id="products" class="cad-products" aria-live="polite"></div>
+          <button class="cad-add" id="add-product" type="button">+ Adicionar produto</button>
+          <p class="cad-help">Informe de 1 a 30 produtos prontos. Não é preciso colocar preço.</p>
+        </fieldset>
+        <label class="cad-consent"><input id="terms" type="checkbox" required><span>Li e aceito os <a href="/termos" target="_blank" rel="noopener">Termos</a> e a <a href="/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
+        <button class="btn or cheio" type="submit" id="submit-signup">Criar minha conta</button>
+      </div>
+    </form>
+    <form id="login-form" class="cad-login" hidden novalidate>
+      <label for="login-email">E-mail</label><input id="login-email" type="email" autocomplete="email" required placeholder="voce@exemplo.com">
+      <label for="login-password">Senha</label><input id="login-password" type="password" autocomplete="current-password" required>
+      <button type="submit" class="btn or cheio" id="submit-login">Entrar na minha conta</button>
+      <button type="button" class="cad-link" id="forgot">Esqueci a senha</button>
+      <button type="button" class="cad-link" id="resend">Reenviar confirmação</button>
+    </form>
+    <section id="success-panel" class="cad-success" hidden aria-live="polite">
+      <div class="cad-success-icon" aria-hidden="true">✓</div>
+      <h2 id="success-title">Cadastro concluído</h2>
+      <p id="success-message">Seu negócio está pronto para acessar no aplicativo.</p>
+      <div id="success-products"></div>
+      <a class="btn or cheio" href="https://app.tachegandoapp.com.br/auth/open">Abrir aplicativo</a>
+      <button id="signout" class="cad-link" type="button">Sair desta conta</button>
+    </section>
+    <p class="cad-note">O Tá Chegando não realiza compras pelo site. Vendedores informam produtos e fazem o atendimento diretamente.</p>
+    <a class="volta" href="/">← Voltar ao site</a>
+  </div></div>
+</main>
+<script src="/js/config-real.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.min.js" defer></script>
+<script src="/js/cadastro-real.js" defer></script>
+</body>
+</html>

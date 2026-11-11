@@ -1,0 +1,25 @@
+/* Herda tokens, fontes e estrutura das telas atuais /entrar e /painel. */
+.cad-eyebrow{font-weight:800;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--laranja);display:block;margin-bottom:12px}
+.cad-fields{display:grid;gap:8px;margin-top:22px}
+.cad-fields label,.cad-login label{font-weight:800;font-size:.92rem;line-height:1.35;margin-top:8px;color:var(--azul-esc)}
+.cad-fields input,.cad-fields select,.cad-login input,.cad-products input{display:block;width:100%;min-height:50px;border:1.5px solid #C9D1CA;border-radius:12px;padding:12px 14px;background:#fff;font:inherit;font-size:1rem;color:var(--texto)}
+.cad-fields input:focus,.cad-fields select:focus,.cad-login input:focus,.cad-products input:focus{border-color:var(--laranja);outline:3px solid #F2D6CC;outline-offset:0}
+.cad-section{border:0;border-top:1px solid #DFE3DC;margin:24px 0 0;padding:18px 0 0;min-width:0}
+.cad-section legend{font-weight:900;font-size:1.05rem;color:var(--azul-esc);padding-right:12px}
+.cad-products-header{margin-top:24px}.cad-products-header strong{display:block;font-size:1rem;color:var(--azul-esc)}
+.cad-products-header p,.cad-help,.cad-note{color:var(--suave);font-size:.83rem;line-height:1.5;margin:4px 0 12px}
+.cad-products{display:grid;gap:10px}.cad-product{display:flex;align-items:center;gap:8px}.cad-product input{flex:1;min-width:0}
+.cad-product button{width:42px;height:46px;flex:none;border:1px solid #C9D1CA;border-radius:12px;background:#fff;color:var(--laranja);font-size:1.4rem;cursor:pointer}
+.cad-add{display:inline-flex;background:var(--azul-cl);color:var(--azul-esc);border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;margin-top:12px}
+.cad-consent{display:flex;align-items:flex-start;gap:10px;margin-top:22px;color:var(--suave);font-size:.82rem;line-height:1.5}
+.cad-consent input{margin-top:4px;accent-color:var(--laranja);width:18px;height:18px;flex:none}
+.cad-consent a{text-decoration:underline;color:var(--azul-esc)}
+.cad-status{border:1px solid #D8E0D9;background:#F6EBDD;color:var(--azul-esc);border-radius:14px;padding:14px;margin-top:22px;font-size:.92rem;line-height:1.5}
+.cad-status[data-error="true"]{background:#FDECEA;border-color:#F3B8B3;color:#9C2B20}
+.cad-login{display:grid;gap:9px;margin-top:18px}.cad-login input{margin-bottom:9px}.cad-link{display:block;border:0;background:transparent;text-decoration:underline;color:var(--azul-esc);font:inherit;font-size:.88rem;font-weight:700;cursor:pointer;margin:12px auto}
+.cad-success{text-align:center;margin:24px auto}.cad-success-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#DDEBDD;color:#173F3C;margin:0 auto 18px;font-size:1.5rem;font-weight:900}
+.cad-success h2{font-size:1.5rem;color:var(--azul-esc)}.cad-success p{font-size:.95rem}
+.cad-success ul{text-align:left;list-style:disc;margin:18px 0;padding-left:22px;font-size:.9rem}
+.cad-note{margin-top:24px}
+.cad-form[hidden],[hidden]{display:none!important}
+@media(max-width:860px){.auth .lado-a{padding-bottom:48px}.auth .form{padding-top:36px}.cad-fields{gap:6px}.cad-section{margin-top:22px}}
