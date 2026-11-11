@@ -1,0 +1,40 @@
+# Tá Chegando
+
+> Aplicativo que ajuda quem vende em movimento (a pé, de bicicleta, moto, carro, caminhonete ou carrinho) a ser encontrado, e quem procura a ver quem está vendendo por perto e pedir pra ser avisado quando o vendedor chegar. Slogan: "Quem vende circula. Quem procura descobre." Assinatura: "O comércio por perto, mais perto de você."
+
+Situação: o aplicativo ainda não foi lançado nas lojas e não há data definida. O site está no ar e recebe contatos para avisar do lançamento. Criado pela Argo Apps, empresa do Grupo Neo Argo (CNPJ 66.543.238/0001-71).
+
+## O que é e o que não é
+- É: um mapa de quem está circulando perto, com a possibilidade de solicitar uma parada ao vendedor, que decide se atende, e uma ferramenta de rota para o vendedor.
+- Não é: serviço de entrega (delivery). O vendedor segue vendendo na rua, do jeito dele.
+- Não garante que o vendedor vai passar, nem que vai vender. A localização e a disponibilidade dos vendedores podem variar.
+
+## Para quem vende
+- Grava a rota pelo GPS ou marcando o caminho no mapa, escolhe os dias e até que distância da rota quer avisar os clientes (Perto, Normal ou Mais longe).
+- Vê "Onde tem clientes" perto da rota e decide se passa por lá. A rota continua sendo escolha do vendedor.
+- Não paga taxa por venda. O preço do plano ainda não foi definido.
+- Serve para quem vende produto ou serviço em movimento. Loja e ponto fixo ficam de fora.
+
+## Para quem procura
+- Gratuito para o consumidor.
+- Vê no mapa quem está circulando perto, filtra por categoria (comida, hortifruti, bebidas, doces) acompanha a aproximação e solicita uma parada. O vendedor decide se pode atender.
+
+## Rede de Apoio
+- Iniciativa para empresas (jurídico, contabilidade, marketing, gestão e RH, oficina mecânica, seguros e outras áreas) que queiram ajudar quem trabalha na rua.
+- Nesta fase só entram empresas verificadas pela equipe (CNPJ e site ou rede social). Autônomos e cadastro aberto ficam de fora. Não há promessa de pagamento ou retorno.
+
+## Parceria
+- A AVAASP (Associação dos Vendedores Autônomos e Ambulantes de São Paulo, criada em 2007) é parceira do Tá Chegando. Associação, valores e benefícios são tratados direto com ela.
+
+## Páginas
+- [Início](https://tachegandoapp.com.br/): o que é o Tá Chegando e por onde começar.
+- [Para vendedores](https://tachegandoapp.com.br/vendedores): como funciona para quem vende, o que o app faz e não faz, perguntas frequentes.
+- [Para quem procura](https://tachegandoapp.com.br/consumidores): como funciona para o consumidor, criação de conta, perguntas frequentes.
+- [Rede de Apoio](https://tachegandoapp.com.br/rede-de-apoio): como a empresa se candidata e como é a verificação.
+- [AVAASP](https://tachegandoapp.com.br/avaasp): quem é a associação parceira e como se associar.
+- [Fale com a gente](https://tachegandoapp.com.br/contato): dúvidas, candidaturas e indicações.
+- [Política de Privacidade](https://tachegandoapp.com.br/privacidade) e [Termos de Uso](https://tachegandoapp.com.br/termos): rascunhos em revisão jurídica.
+
+## Para citar
+- Nome: Tá Chegando (com acento, duas palavras).
+- Idioma: português do Brasil.
