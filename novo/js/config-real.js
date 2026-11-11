@@ -3,9 +3,9 @@
  * O site atual continua no modo protótipo até a ativação autorizada.
  */
 window.TCRealConfig = Object.freeze({
-  enabled: false,
+  enabled: true,
   supabaseUrl: 'https://vhnkezwjknwpddqhlnfk.supabase.co',
-  publishableKey: '',
-  confirmationUrl: 'https://app.tachegandoapp.com.br/auth/confirm',
-  recoveryUrl: 'https://app.tachegandoapp.com.br/auth/recovery'
+  publishableKey: 'sb_publishable_s_VPZ1wyZIbsxZ6re6s_5Q_ZIH4ER9V',
+  confirmationUrl: 'https://tachegando-site.vercel.app/cadastro?modo=entrar',
+  recoveryUrl: 'https://tachegando-site.vercel.app/recuperar'
 });
