@@ -6,6 +6,6 @@ window.TCRealConfig = Object.freeze({
   enabled: true,
   supabaseUrl: 'https://vhnkezwjknwpddqhlnfk.supabase.co',
   publishableKey: 'sb_publishable_s_VPZ1wyZIbsxZ6re6s_5Q_ZIH4ER9V',
-  confirmationUrl: 'https://tachegando-site.vercel.app/cadastro?modo=entrar',
-  recoveryUrl: 'https://tachegando-site.vercel.app/recuperar'
+  confirmationUrl: 'https://tachegandoapp.com.br/cadastro?modo=entrar',
+  recoveryUrl: 'https://tachegandoapp.com.br/recuperar'
 });
